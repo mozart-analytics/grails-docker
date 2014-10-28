@@ -10,12 +10,12 @@ More info about [Grails](https://grails.org/).
 This image was inspired by the [niaquinto/grails](https://registry.hub.docker.com/u/niaquinto/grails/) image available in the Docker Registry Hub.
 
 ## Technologies / Versions Used
-- Grails 2.4.3 (by default, other versions can be specified as well) 
+- Grails 2.4.3 (by default, other versions can be specified) 
 - Java JDK 7+ 
 - Tomcat 7+ 
 
 ## Running Using Defaults ##
-By default, the attached app (attached by using `-v`) will run using the grails `run-war` command which means that the app will run as if it was in a dedicated Tomcat instance in production mode (the environment can be specified using the `GRAILS_ENV` environment variable). 
+By default, the attached app (attached by using `-v`) will run using the grails `run-war` command which means that the app will run as if it was in a dedicated Tomcat instance in **production** mode. 
 
 Use the following command to run on default mode (remember to ALWAYS specify your app folder in the `-v` command):
 
@@ -27,15 +27,14 @@ This default behavior can be altered by modifying the command when running the i
 You can change the default behavior of the image by either changing some environment variables or executing a different command rather than the default `run-war` command.
 
 ### Environment Variables ###
-The image initializes two default environment variables:
+The image initializes the following customizable Grails related environment variables:
 
  - `GRAILS_VERSION`: Specifies the version of Grails to download (default: `2.4.3`).
- - `GRAILS_ENV`: Specifies the environment on which to bootstrap and run your Grails app (default: `production`).
 
 ### Run Command ###
-You can execute a different Grails command rather than the `run-war` that is run by default by specifying the command after the `mozart/grails` image name in the form of ` -- {grails-command}`. The space after the two dashes is **required**.
+You can execute a different Grails command rather than the `run-war` that is run by default by specifying the command after the `mozart/grails` image name in the form of ` -- {grails-command}`. The space after the two dashes is **required**. For example:
 
-**Example:** `docker run --rm -v /path/to/your/project:/app:rw -p 80:8080 --name grails mozart/grails -- run-app`
+`docker run --rm -v /path/to/your/project:/app:rw -p 80:8080 --name grails mozart/grails -- run-app`
 
 ## Interactive Mode ##
 You can run the Grails console in interactive mode by executing the following command:

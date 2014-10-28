@@ -2,7 +2,7 @@ FROM phusion/baseimage:0.9.13
 MAINTAINER Manuel Ortiz Bey <ortiz.manuel@mozartanalytics.com>
 
 # Set customizable env vars defaults.
-ENV GRAILS_ENV production
+ENV grails.env production
 ENV GRAILS_VERSION 2.4.3
 
 # Set phusion/baseimage's correct settings.
@@ -42,4 +42,4 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 # Use phusion/baseimage's init system.
 # See http://phusion.github.io/baseimage-docker/ for more info.
 ENTRYPOINT ["/sbin/my_init", "grails"]
-CMD ["run-app"]
+CMD ["run-war"]

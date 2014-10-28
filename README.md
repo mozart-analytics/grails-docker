@@ -50,7 +50,7 @@ Or by downloading directly from the registry:
 
 `docker pull mozart-analytics/grails`
 
-### How to use for your Grails apps (optional) ###
+## Extra: How to use for your Grails apps ##
 You can also leverage the use of this image for your internal apps if you want more freedom of customization and speed of initialization. To do this: 
 
  1. Create a Dockerfile for your app.

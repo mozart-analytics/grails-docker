@@ -44,7 +44,9 @@ You can run the Grails console in interactive mode by executing the following co
 
 ## Building the Image ##
 You can build the image by yourself by executing:
-`docker build https://github.com/mozart-analytics/grails-docker`
+
+`docker build https://raw.githubusercontent.com/mozart-analytics/grails-docker/master/Dockerfile`
 
 Or by downloading directly from the registry:
+
 `docker pull mozart-analytics/grails`

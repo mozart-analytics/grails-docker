@@ -15,7 +15,7 @@ This image was inspired by the [niaquinto/grails](https://registry.hub.docker.co
 - Tomcat 7+ 
 
 ## Running Using Defaults ##
-By default, the attached app (attached by using `-v`) will run using the grails `run-war` command which means that the app will run as if it was in a dedicated Tomcat instance in **production** mode. 
+By default, the mounted app (mounted by using `-v`) will run using the grails `run-war` command which means that the app will run as if it was in a dedicated Tomcat instance in **production** mode. 
 
 Use the following command to run on default mode (remember to ALWAYS specify your app folder in the `-v` command):
 

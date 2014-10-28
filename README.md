@@ -49,3 +49,36 @@ You can build the image by yourself by executing:
 Or by downloading directly from the registry:
 
 `docker pull mozart-analytics/grails`
+
+### How to use for your Grails apps (optional) ###
+You can also leverage the use of this image for your internal apps if you want more freedom of customization and speed of initialization. To do this: 
+
+ 1. Create a Dockerfile for your app.
+ 2. Use this image as the `FROM:` image of your app's Dockerfile.
+ 3. Put your app's Dockerfile on the root of the app's folder.
+ 4. Build your image using your own custom Dockerfile.
+
+An example of a Dockerfile for a Grails-Hello-World app could be:
+
+```
+FROM mozart/grails
+MAINTAINER Manuel Ortiz Bey <ortiz.manuel@gmail.com>
+
+# Copy code to /app directory
+COPY . /app
+WORKDIR /app
+
+# Download app dependencies
+RUN grails refresh-dependencies
+
+# Use `run-app` instead of image's default run-war.
+CMD ["run-app"]
+```
+
+Then build your Docker image by executing:
+
+`docker build -t "{repo-name}/Grails-Hello-World" .`
+
+And finally run your app as a Docker container by executing:
+
+`docker run -i -t -p 8080:8080 {repo-name}/Grails-Hello-World`

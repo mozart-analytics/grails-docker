@@ -1,6 +1,6 @@
 # Optimized Grails Container #
 
-Docker image that will bootstrap an environment for running a Grails application using the Docker optimized phusion/baseimage as a base and its related scripts for init and destroy. By default, it will run the Grails app using the `run-war` directive which is the most optimized way of running Grails. 
+Docker image that will bootstrap an environment for running a Grails application using the Docker optimized phusion/baseimage as a base and its related scripts for init and destroy. By default, it will run the Grails app using the `prod run-war` directive which is the most optimized way of running Grails. 
 
 More info about [phusion/baseimage](https://github.com/phusion/baseimage-docker).
 
@@ -15,7 +15,7 @@ This image was inspired by the [niaquinto/grails](https://registry.hub.docker.co
 - Tomcat 7+ 
 
 ## Running Using Defaults ##
-By default, the mounted app (mounted by using `-v`) will run using the grails `run-war` command which means that the app will run as if it was in a dedicated Tomcat instance in **production** mode. 
+By default, the mounted app (mounted by using `-v`) will run using the grails `prod run-war` command which means that the app will run as if it was in a dedicated Tomcat instance in **production** mode. 
 
 Use the following command to run on default mode (remember to ALWAYS specify your app folder in the `-v` command):
 

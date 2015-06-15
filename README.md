@@ -10,7 +10,7 @@ More info about [Grails](https://grails.org/).
 This image was inspired by the [niaquinto/grails](https://registry.hub.docker.com/u/niaquinto/grails/) image available in the Docker Registry Hub.
 
 ## Technologies / Versions Used
-- Grails 2.4.5 (by default, other versions can be specified) 
+- Grails 2.5.0 (by default, all versions up to `2.5.0` can be specified) 
 - Java JDK 7+ 
 - Tomcat 7+ 
 
@@ -29,7 +29,7 @@ You can change the default behavior of the image by either changing some environ
 ### Environment Variables ###
 The image initializes the following customizable Grails related environment variables:
 
- - `GRAILS_VERSION`: Specifies the version of Grails to download (default: `2.4.5`).
+ - `GRAILS_VERSION`: Specifies the version of Grails to download (default: `2.5.0` max: `2.5.0`).
 
 ### Run Command ###
 You can execute a different Grails command rather than the `run-war` that is run by default by specifying the command after the `mozart/grails` image name in the form of ` -- {grails-command}`. The space after the two dashes is **required**. For example:

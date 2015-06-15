@@ -2,7 +2,8 @@ FROM phusion/baseimage:0.9.13
 MAINTAINER Manuel Ortiz Bey <ortiz.manuel@mozartanalytics.com>
 
 # Set customizable env vars defaults.
-ENV GRAILS_VERSION 2.4.5
+# Set Grails version (max version for this Docker image is: 2.5.0).
+ENV GRAILS_VERSION 2.5.0
 
 # Set phusion/baseimage's correct settings.
 ENV HOME /root

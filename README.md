@@ -8,7 +8,7 @@ Docker image that will bootstrap an environment for running a Grails application
 - Tomcat 7+ (for Grails 2) or 8+ (for Grails 3)
 
 ## Running Using Defaults ##
-By default, the mounted app (mounted by using `-v`) will run using the grails `prod run-app` (or `prod run-war` for Grails 2) command which means that the app will run as if it was in a dedicated Tomcat instance in **production** mode. 
+By default, the container will start inside Grails interactive mode. From here, you can run the app by simply typing `run-app` or execute any other valid Grails commands you may want to. 
 
 Use the following command to run on default mode (remember to ALWAYS specify your app folder in the `-v` command):
 
@@ -19,48 +19,27 @@ Use the following command to run on default mode (remember to ALWAYS specify you
 This default behavior can be altered by using the _tag_ modifier for specifying the Grails image version (see the _Image Tag_ version), by modifying the command when running the image (see the _Run Command_ version) or by editing the default environment variables (see the _Environment Variables_ section). 
 
 ## Changing Behavior 
-You can change the default behavior of the image by either changing some environment variables or executing a different command rather than the default `run-war` command.
+You can change the default behavior of the image by either changing some environment variables or executing a command rather than entering the default Grails interactive mode.
 
 ### Image Tag / Version
 You can change the default behaviour of the image when building and running it by specifying a different Grails image version using the _tag_ (e.g.:`{repository}/{imageName}:{tag}`) modifier at the end of the image identifier (e.g.: `docker run --rm -v /path/to/your/project:/app:rw -p 80:8080 --name grails mozart/grails:2`)
 
 ### Environment Variables 
-The image contains the following customizable Grails related environment variables:
+The image contains the following customizable Grails related environment variables that can be changed inside the image's Dockerfile.
 
  - `GRAILS_VERSION`: Specifies the version of Grails to download (default: `3.0.12`; min: `2.0.0`; max: `3.1.0.RC2`).
 
 > **IMPORTANT:** When using the `GRAILS_VERSION` env var to specify a version less than `3.0.0` you MUST use the image version tag with a value of `2` (e.g.: mozart/grails:2). If not, image building will fail!
 
 ### Run Command 
-You can execute a different Grails command rather than the `run-app` that is run by default, by specifying the command after the `mozart/grails` image name in the following form:
-
-#### For Grails 2
-
-` -- {grails-command}` - The space after the two dashes is **required**. For example:
-
-`docker run --rm -v /path/to/your/project:/app:rw -p 80:8080 --name grails mozart/grails:2 -- run-app`
-
-#### For Grails 3
-
-` {grails-command}` - For example:
+You can execute a different Grails command rather than the interactive mode that is run by default, by specifying the command after the `mozart/grails` image name in the following form: ` {grails-command}`. For example:
 
 `docker run --rm -v /path/to/your/project:/app:rw -p 80:8080 --name grails mozart/grails:3 run-app`
-
-## Interactive Mode 
-You can run the Grails console in interactive mode by executing the following command:
-
-#### For Grails 2:
-
-`docker run --rm -v /path/to/your/project:/app:rw -p 80:8080 --name grails mozart/grails -- --interactive`
-
-#### For Grails 3:
-
-`docker run --rm -v /path/to/your/project:/app:rw -p 80:8080 --name grails mozart/grails --interactive`
 
 ## Building the Image 
 You can build the image by yourself by executing:
 
-`docker build https://raw.githubusercontent.com/mozart-analytics/grails-docker/master/Dockerfile`
+`docker build https://raw.githubusercontent.com/mozart-analytics/grails-docker/master/grails-3/Dockerfile`
 
 Or by downloading directly from the registry:
 
@@ -76,18 +55,38 @@ You can also leverage the use of this image for your internal apps if you want m
 
 An example of a Dockerfile for a Grails-Hello-World app could be:
 
+### For Grails 3:
 ```
 FROM mozart/grails:3
-MAINTAINER Manuel Ortiz Bey <ortiz.manuel@gmail.com>
+MAINTAINER Manuel Ortiz Bey <ortiz.manuel@mozartanalytics.com>
 
-# Copy code to /app directory
+# Copy App files
 COPY . /app
-WORKDIR /app
 
-# Run grails compile to download app dependencies and prep the app to run.
-RUN grails compile
+# Run Grails dependency-report command to pre-download dependencies but not 
+# create unnecessary build files or artifacts.
+RUN grails dependency-report
 
-# Use `run-app` to start application.
+# Set Default Behavior
+ENTRYPOINT ["grails"]
+CMD ["run"]
+```
+
+### For Grails 2:
+```
+FROM mozart/grails:2
+MAINTAINER Manuel Ortiz Bey <ortiz.manuel@mozartanalytics.com>
+
+# Copy App files
+COPY . /app
+
+# Run Grails refresh-dependencies command to 
+# pre-download dependencies but not create
+# unnecessary build files or artifacts.
+RUN grails refresh-dependencies
+
+# Set Default Behavior
+ENTRYPOINT ["grails"]
 CMD ["run-app"]
 ```
 

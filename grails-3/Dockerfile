@@ -3,7 +3,7 @@ MAINTAINER Manuel Ortiz Bey <ortiz.manuel@mozartanalytics.com>
 
 # Set customizable env vars defaults.
 # Set Grails version (default: 3.1.0; min: 3.0.0; max: 3.1.0).
-ENV GRAILS_VERSION 3.1.0
+ENV GRAILS_VERSION 3.0.13
 
 # Install Grails
 WORKDIR /usr/lib/jvm

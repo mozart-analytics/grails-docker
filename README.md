@@ -3,7 +3,7 @@
 Docker image that will bootstrap an environment for running a Grails application using Docker optimized base images. By default, it will run the Grails app using the `prod run-app` (or `prod run-war` for Grails 2) directive which is the most optimized way of running Grails for production environments. However, you can easily change the default behaviour for your specific uses (see the _Changing Behaviour_ section for more details on this).
 
 ## Technologies / Versions Used
-- Grails 3.1.8 (by default; all versions from `2.0.0` up to `3.1.8` can be specified) 
+- Grails 3.2.8 (by default; all versions from `2.0.0` up to `3.2.8` can be specified) 
 - Java JDK 7+ (for Grails 2) or 8+ (for Grails 3)
 - Tomcat 7+ (for Grails 2) or 8+ (for Grails 3)
 
@@ -27,7 +27,7 @@ You can change the default behaviour of the image when building and running it b
 ### Environment Variables 
 The image contains the following customizable Grails related environment variables that can be changed inside the image's Dockerfile.
 
- - `GRAILS_VERSION`: Specifies the version of Grails to download (default: `3.1.8`; min: `2.0.0`; max: `3.1.8`).
+ - `GRAILS_VERSION`: Specifies the version of Grails to download (default: `3.2.8`; min: `2.0.0`; max: `3.2.8`).
 
 > **IMPORTANT:** When using the `GRAILS_VERSION` env var to specify a version less than `3.0.0` you MUST use the image version tag with a value of `2` (e.g.: mozart/grails:2). If not, image building will fail!
 
